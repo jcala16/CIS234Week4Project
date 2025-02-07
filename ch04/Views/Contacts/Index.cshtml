@@ -1,0 +1,44 @@
+@model IEnumerable<CH04.Models.Contact>
+
+<div class="banner">
+    <h1 class="mb-4">Contacts</h1>
+
+    <p>
+        <a asp-action="Create" class="btn btn-success">Create New</a>
+    </p>
+</div>
+
+<table class="table table-striped table-hover table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Category</th>
+            <th>Date Added</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var contact in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Details" asp-route-id="@contact.Id" class="text-decoration-none fw-bold">@contact.FirstName</a>
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@contact.Id" class="text-decoration-none fw-bold">@contact.LastName</a>
+                </td>
+                <td>@contact.Email</td>
+                <td>@contact.Phone</td>
+                <td>@contact.Category?.Name</td>
+                <td>@contact.DateAdded.ToString("MM/dd/yyyy")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@contact.Id" class="btn btn-primary btn-sm">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@contact.Id" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
